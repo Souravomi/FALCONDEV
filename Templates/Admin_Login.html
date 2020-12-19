@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin-Login</title>
+
+    <!-- Message box -->
+
+    <style>
+		.alert {
+		  padding: 10px;
+		  background-color: #f44336;
+		  color: white;
+		  opacity: 1;
+		  transition: opacity 0.6s;
+		  margin-bottom: 15px;
+		}
+		
+		.alert.success {background-color: #4CAF50;}
+		.alert.info {background-color: #2196F3;}
+		.alert.warning {background-color: #ff9800;}
+		
+		.closebtn {
+		  margin-left: 15px;
+		  color: white;
+		  font-weight: bold;
+		  float: right;
+		  font-size: 22px;
+		  line-height: 20px;
+		  cursor: pointer;
+		  transition: 0.3s;
+		}
+		
+		.closebtn:hover {
+		  color: black;
+		}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="stylish Sign in and Sign up Form A Flat Responsive widget, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!--online_fonts-->
+	<link href="//fonts.googleapis.com/css?family=Sansita:400,400i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+<!--//online_fonts-->
+	<link href="{% static 'Admin_Login/css/style.css' %}" rel='stylesheet' type='text/css' media="all" /><!--stylesheet-->
+</head>
+<body>
+<h1>ADMIN DASHBOARD</h1>
+<div class="form-w3ls">
+	<div class="form-head-w3l">
+		<h2>s</h2>
+	</div>
+    <ul class="tab-group cl-effect-4">
+        <li class="tab active"><a href="#signin-agile">Login</a></li>
+		<li class="tab"><a href="#signup-agile">Reset</a></li>        
+	</ul>
+	
+	{% if messages %}
+       
+           {% for message in messages %}
+
+
+<div class="alert">
+  <span class="closebtn">&times;</span>  
+  <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+</div>
+<br>
+
+
+{% endfor %}
+      
+       {% endif %}
+
+    <div class="tab-content">
+        <div id="signin-agile">   
+			<form action="" method="post">
+
+				{% csrf_token %}
+				
+				<p class="header">User Name</p>
+				<input type="email" name="email" placeholder="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}" required="required">
+				
+				<p class="header">Password</p>
+				<input type="password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
+				
+				<input type="submit" class="sign-in" value="Sign In">
+			</form>
+		</div>
+		<div id="signup-agile">   
+			<form action="#" method="post">
+				
+				<p style="color: red">Enter email below and we'll send reset link.</p>
+				<br>
+				
+				<p class="header">Email Address</p>
+				<input type="email" name="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="required">
+			
+				
+				<input type="submit" class="register" value="RESET">
+			</form>
+		</div> 
+    </div><!-- tab-content -->
+</div> <!-- /form -->	  
+<p class="copyright">&copy; 2020 Content Owned, Maintained and Updated By: <a href="{% url 'Home' %}" target="_blank">Team Falcondev</a></p>
+<!-- js files -->
+<script src="{% static 'Admin_Login/js/jquery.min.js' %}"></script>
+<script src="{% static 'Admin_Login/js/index.js' %}"></script>
+<!-- /js files -->
+
+{% if messages %}
+
+<script>
+
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+  
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>
+
+  {% endif %}
+
+</body>
+</html>

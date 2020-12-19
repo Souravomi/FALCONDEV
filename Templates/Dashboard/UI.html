@@ -1,0 +1,294 @@
+{% extends 'Dashboard/Common.html' %}
+{% load static %}
+
+
+{% block Head %}
+
+<li>
+    <a   href="{% url 'Admin_Home' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+</li>
+ <li>
+    <a class="active-menu" href="{% url 'Admin_UI' %}"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+</li>
+<li>
+    <a  href="{% url 'Admin_Services' %}"><i class="fa fa-qrcode fa-3x"></i> Services</a>
+</li>
+       <li  >
+    <a   href="{% url 'Admin_Updations' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Updations</a>
+</li>	
+  <li  >
+    <a  href="{% url 'Admin_Task' %}"><i class="fa fa-table fa-3x"></i> My Task</a>
+</li>
+<li  >
+    <a  href="{% url 'Admin_Profile' %}"><i class="fa fa-edit fa-3x"></i> Profile </a>
+</li>				
+
+<li  >
+    <a  href="{% url 'Logout' %}"><i class="fa fa-square-o fa-3x"></i> Logout</a>
+</li>	
+
+{% endblock %}
+
+
+{% block body %}
+
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+             <h2>Hi , {{ data.Name }}</h2>   
+                 
+            </div>
+        </div>
+
+
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <span class="close">&times;</span>
+                            <h3><center>ADD TECHNOLOGIES</center></h3>
+                      
+                          </div>
+                          <div class="modal-body">
+                            <br>
+          
+                            <form action="" method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              
+                            <div class="row">
+
+                               
+                                        <div class="col-md-12 text-center">
+                                 <div class="card">
+                                    <div class="card-body">
+                                
+                                        <input class="form-control mr-sm-2" name="lan" type="text" placeholder="Language" required ><br>
+                             
+                                        <input class="form-control mr-sm-2" name="desc" type="textarea" placeholder="Description" required ><br>
+                             
+                                      
+                                      <input class="form-control mr-sm-2" src="{% static 'Img/Noimage.png' %}"  name="img" type="text" onfocus="(this.type='file')"  id="myimage"  placeholder="Upload Image" title="Upload Image" accept="image/*" required>
+                              <label><span style="color: red">(* Please upload image files only)</span></label><br>
+                              <select name="status" class="nav-item dropdown form-control mr-sm-2" id="status" required><br>
+                                <option value="" disabled selected hidden>Status</option>
+                                <option value="Active">Active</option>
+                                 <option value="Inactive">Inactive</option>
+                                </select>
+                                <br>
+                                      <button type="submit" name="lanbtn" class="btn btn-primary btn-info btn-md form-control" >Submit</button>
+                                      
+                                       </div> </div> </div>
+                                        </div>
+                       
+                                      </form>
+          
+                                      <br>
+                      
+                                    </div>
+                                 </div>
+                              </div> 
+
+   <hr>
+   
+            <!-- /. ROW  -->
+    <div class="row">
+        <div class="col-md-12 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+               UI Settings
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">Home</a>
+                        </li>
+                        <li class=""><a href="#Services" data-toggle="tab">Services</a>
+                        </li>
+                        <li class=""><a href="#Languages" data-toggle="tab">Languages</a>
+                        </li>
+                        <li class=""><a href="#settings" data-toggle="tab">Settings</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+                            {% if messages %}
+       
+                            {% for message in messages %}
+                            <br>
+                            <div class="alert success">
+                             <span class="closebtn">&times;</span>  
+                            <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                          </div>
+                       
+                            {% endfor %}
+                            {% endif %}
+                            
+                            <h2 class="card-title">WELCOME BACK</h2>
+                            <p>This is the function helps you to change your user interface change.</p>
+                        </div>
+                        <div class="tab-pane fade" id="Services">
+                            <center><h2 class="card-title">SERVICES</h2></center> 
+                            <hr>
+                            <div class="row" >
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                           
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                     
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#ID</th>
+                                                        <th>Service Name</th>
+                                                        <th>Type</th>
+                                                        <th>STATUS</th>
+                                                         <th>ADDED BY</th>
+                                                         <th>DATE OF UPDATE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for service in service %}
+                                                    <tr>
+                                                        <td>{{ service.id }}</td>
+                                                        <td>{{ service.Service }}</td>
+                                                        <td>{{ service.Type }}</td>
+                                                        <td>{{ service.Status }}</td>
+                                                        <td>{{ service.Owner }}</td>
+                                                        <td>{{ service.Added_On }}</td>
+                                                    </tr>
+                                                   
+                                                 {% endfor %}
+                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Languages">
+                            <center><h2 class="card-title">TECHNOLOGIES</h2></center> 
+                            <hr>
+                            <div class="row" >
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                           
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                     
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#ID</th>
+                                                        <th>NAME</th>
+                                                        <th>STATUS</th>
+                                                         <th>ADDED BY</th>
+                                                         <th>DATE OF UPDATE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   
+                                                    {% for techn in techn %}
+                                                    <tr>
+                                                        <td>{{ techn.id }}</td>
+                                                        <td>{{ techn.Language }}</td>
+                                                        <td>{{ techn.Status }}</td>
+                                                        <td>{{ techn.Owner }}</td>
+                                                        <td>{{ techn.Added_On }}</td>
+                                                    </tr>
+                                                   
+                                                 {% endfor %}
+                                                 
+                    
+                                                </tbody>
+                                            </table>
+                                            <button id="myBtn"   class="btn btn-success btn-md">Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="settings">
+                            <center><h2 class="card-title">DETAILS</h2></center> 
+                            <div class="row">
+
+                                <div class="col-md-6 text-center">
+
+                                    <form action="" method="POST">
+                                        
+                                        {% csrf_token %}
+
+                                  <div class="card">
+                                     <div class="card-body">
+                                        <label for="chkMob">
+                                            <input type="checkbox" id="chkMob" />
+                                            Do you want to change?
+                                        </label>
+                                        <br />
+                                        <label>MOBILE</label>
+                                      <input class="form-control mr-sm-2" id="mob" name="mob" type="text" value="{{contact.Mobile}}" disabled="disabled" maxlength="10" required pattern="[1-9]{1}[0-9]{9}" title="Please Enter Valid Number"><br>
+                                      <button type="submit" name="mobbtn" id="mobbtn" class="btn btn-info btn-md form-control" disabled="disabled">Update Mobile</button>   
+                                <br>
+                                <br>     
+                                             
+                                     </div>
+                                </div>
+
+                            </form>
+
+                                </div> 
+                                
+                                         <div class="col-md-6 text-center">
+                                  <div class="card">
+
+                                    <form action="" method="POST">
+                                        
+                                        {% csrf_token %}
+
+                                     <div class="card-body">
+                                        <label for="chkEmail">
+                                            <input type="checkbox" id="chkEmail" />
+                                            Do you want to change?
+                                        </label>
+                                        <br />
+                                      <label>E-MAIL</label>
+                                      <input class="form-control mr-sm-2" id="email" value ={{contact.EMail}} name="email" type="email" disabled="disabled" required><br>
+                                      <button type="submit" name="embtn" id="embtn" class="btn btn-success btn-md form-control" disabled="disabled">Update E-mail</button>
+                                      <br>
+                                     </div>
+
+                                     </form>
+
+                                  </div>
+                                </div> 
+                                
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+    
+  
+            <!-- /. ROW  -->
+
+</div>
+    
+    </div>
+
+{% endblock %}

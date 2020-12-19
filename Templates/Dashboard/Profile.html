@@ -1,0 +1,207 @@
+{% extends 'Dashboard/Common.html' %}
+{% load static %}
+
+
+{% block Head %}
+<li>
+    <a   href="{% url 'Admin_Home' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+</li>
+ <li>
+    <a  href="{% url 'Admin_UI' %}"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+</li>
+<li>
+    <a  href="{% url 'Admin_Services' %}"><i class="fa fa-qrcode fa-3x"></i> Services</a>
+</li>
+       <li  >
+    <a   href="{% url 'Admin_Updations' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Updations</a>
+</li>	
+  <li  >
+    <a  href="{% url 'Admin_Task' %}"><i class="fa fa-table fa-3x"></i> My Task</a>
+</li>
+<li  >
+    <a class="active-menu"  href="{% url 'Admin_Profile' %}"><i class="fa fa-edit fa-3x"></i> Profile </a>
+</li>				
+
+<li  >
+    <a  href="{% url 'Logout' %}"><i class="fa fa-square-o fa-3x"></i> Logout</a>
+</li>	
+{% endblock %}
+
+
+{% block body %}
+
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+             <h2>Hi , {{ data.Name }}</h2>   
+                
+               
+            </div>
+        </div>
+         <!-- /. ROW  -->
+         <hr />
+        
+        
+        <div class="col-md-12 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#home" data-toggle="tab">Home</a>
+                        </li>
+                        <li class=""><a href="#profile-pills" data-toggle="tab">Profile</a>
+                        </li>
+                        <li class=""><a href="#messages-pills" data-toggle="tab">Security</a>
+                        </li>
+                        <li class=""><a href="#settings-pills" data-toggle="tab">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+
+                            {% if messages %}
+       
+                            {% for message in messages %}
+                            <br>
+                            <div class="alert success">
+                             <span class="closebtn">&times;</span>  
+                            <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                          </div>
+                       
+                            {% endfor %}
+                        
+                        {% endif %}
+
+                            <h2 class="card-title">WELCOME BACK</h2>
+                            <p>This is the function helps you to manage your account.</p>
+                        </div>
+                        <div class="tab-pane fade" id="profile-pills">
+                            
+                            <center><h2 class="card-title">PERSONAL DETAILS</h2></center> 
+                        
+                            <hr>
+                            
+                                <div class="row">
+
+<div class="col-md-6 text-center">
+  <div class="card">
+     <div class="card-body">
+         <label>NAME</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Name }}" disabled><br>
+         <label>ADDRESS 1</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Addre_1 }}" disabled><br>
+         <label>ADDRESS 2</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Addre_2 }}" disabled><br>
+         <label>ADDRESS 3</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Addre_3 }}" disabled><br>
+         <label>PINCODE</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Pin }}" disabled><br>
+         <label>DATE OF BIRTH</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.DOB }}" disabled><br>
+         <label>GENDER</label>
+         <input class="form-control mr-sm-2" type="text" value="{{ data.Gender }}" disabled><br>    
+             
+<br>
+             
+             
+     </div>
+</div>
+</div> 
+
+         <div class="col-md-6 text-center">
+  <div class="card">
+     <div class="card-body">
+ 
+      <label>DESIGNATION</label>
+      <input class="form-control mr-sm-2" type="text" value="{{ data.Designation }}" disabled><br>
+      <label>MOBILE</label>
+      <input class="form-control mr-sm-2" type="text" value="{{ data.Mobile }}" disabled><br>
+      <label>E-MAIL</label>
+      <input class="form-control mr-sm-2" type="text" value="{{ data.EMail }}" disabled><br>
+      <label>STATUS</label>
+      <input class="form-control mr-sm-2" type="text" value="{{ data.Status }}" disabled><br> 
+      <img src="{{ data.image.url }}"  width="450" height="220"><br><br>
+     </div>
+  </div>
+</div> 
+
+
+
+</div>
+                        </div>
+                        <div class="tab-pane fade" id="messages-pills">
+                          
+                              <form action="" method="POST" onsubmit="call()">
+{% csrf_token %}
+<div class="card">
+<div class="card-body">
+<center><h2 class="card-title">UPDATE PASSWORD</h2></center> 
+   <hr>
+   <input class="form-control mr-sm-2" name="old" id="old" type="password" placeholder="Current Password" required><br>
+       
+ <input class="form-control mr-sm-2"  id="psw" name="psw" type="password" placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+   <br>
+   <input class="form-control mr-sm-2" type="password" id="confirm" name="confirm" placeholder="Confirm Password" required>
+   <br>
+   <button type="submit" name="passbtn" class="btn btn-success btn-md form-control" >Update</button>
+   <br>
+  
+       <!-- Message start --> 
+
+       <br>
+                 <div class="">
+     <div id="message">
+  <h6>Password must contain the following:</h6>
+  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+  <p id="number" class="invalid">A <b>number</b></p>
+  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+</div>
+          </div>
+
+
+       <!-- Message End --> 
+
+</div>
+</div>
+
+</form>
+                        </div>
+
+                        
+                        
+                        <div class="tab-pane fade" id="settings-pills">
+                           <div class="card">
+                               <br>
+
+   <div class="card-body">
+     <center><h2 class="card-title">CONTACT ADMINISTRATOR</h2></center> 
+       <hr>
+
+      <form action="" method="POST">
+
+       {% csrf_token %}
+
+       <input class="form-control mr-sm-2" name="Sub" type="text" placeholder="Subject" required><br>
+       <input class="form-control mr-sm-2" name="Isu" type="textarea" placeholder="Issue Report (Optional)" ><br>
+       <textarea class="form-control mr-sm-2" name="Desc" placeholder="Description" required></textarea><br>
+       <button type="submit" name="contctbtn" class="btn btn-info btn-md form-control" >Submit</button> <br>
+
+      </form>
+   </div>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+</div>
+     <!-- /. PAGE INNER  -->
+    </div>
+
+    {% endblock %}

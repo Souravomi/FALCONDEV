@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logout</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'Bootstrap/css/bootstrap-4.0.0.css' %}" rel="stylesheet">
+
+  </head>
+  <body class="jumbotron jumbotron-fluid text-center">
+	  <br>
+	   <br>
+        <div>
+        <img src="{% static 'Bootstrap/img/logout-rounded.png' %}"  width="100" height="100">
+    </div><br>
+    <div>
+       <h1 class="display-4"><strong>YOUR SESSION EXPIRED</strong></h1>
+       <p class="lead">Thank you for using our website click <a href="{% url 'Admin_Login' %}">here </a>to login.</p>
+	 
+       </div>
+	<br><br>
+    <div class="container">
+    
+     
+  
+       <br>
+       <hr>
+       <div class="row">
+          <div class="text-center col-lg-6 offset-lg-3">
+			  <p>E-mai us: <strong>help.freeproject.com</strong></p>
+             <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; <a href="{% url 'Home' %}" ><span style="color:green">TEAM FALCONDEV</span></a></p>
+          </div>
+       </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="{% static 'Bootstrap/js/jquery-3.2.1.min.js' %}" href="{% static 'Bootstrap/js/jquery-3.2.1.min.js' %}"></script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="{% static 'Bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'Bootstrap/js/bootstrap-4.0.0.js' %}"></script>
+  </body>
+</html>

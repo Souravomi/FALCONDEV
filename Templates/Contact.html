@@ -1,0 +1,170 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Contact Us</title>
+
+    <style>
+        .btn {
+          background-color: DodgerBlue;
+          border: none;
+          color: white;
+          padding: 12px 16px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        
+        /* Darker background on mouse-over */
+        .btn:hover {
+          background-color: RoyalBlue;
+        }
+        </style>
+
+    <!-- Icons font CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="{% static 'REGISTER/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'REGISTER/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'REGISTER/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'REGISTER/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'REGISTER/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body onLoad="disableTextBox();">
+    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <!--<div class="card-heading"></div> -->
+                <img src="{% static 'MESSAGE/images/business.jpg' %}" ></img>
+                <center><a href="{% url 'Home' %}"><button class="btn btn-success" ><i class="fa fa-home"></i> Home</button></a></center>
+                <div class="card-body">
+                    <h2 class="title">Register Here..</h2>
+					
+                    <form method="post" action="">
+
+                        {% csrf_token %}
+						
+                        <!-- <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder="NAME *" name="name" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" required>
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                        </div>
+
+						<!-- <div class="input-group">
+                            <input class="input--style-1" type="email" placeholder="E-MAIL *" name="email" required>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+
+                        
+                        <!-- <div class="input-group">
+                            <input class="input--style-1" type="text" placeholder="MOBILE (OPTIONAL)" name="mobile">
+                        </div> -->
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mobile" pattern="[1-9]{1}[0-9]{9}" title="Please Enter Valid Number" maxlength="10">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your mobile with anyone else.</small>
+                        </div>
+
+
+						<div class="form-group">
+                            <label for="service">Service</label>
+                            <select  name="service" class="nav-item dropdown form-control mr-sm-2" id="service" onchange="ShowHideDiv(this)" required>
+                                <option value="" disabled selected hidden>Select</option>
+                                  <option value="ACDEMIC">ACDEMIC</option>
+                                  <option value="BUSINESS">BUSINESS</option>
+                                  <option value="OTHER">OTHER</option>
+                                </select>
+                                
+                        </div>
+
+                       
+						<div class="form-group" id="textneed" style="display: none">
+                            <label for="WHAT YOU NEED">What You Need</label>
+                            <input class="form-control" type="text" placeholder="" name="need" id="need" >
+                        </div>
+						<div class="form-group" id="lan" style="display: none">
+                            <label for="Language">Language</label>
+                            <select  name="language" class="nav-item dropdown form-control mr-sm-2" id="language">
+                                <option value="" disabled="disabled" selected="selected" hidden>Select</option>
+                                  {% for language in language %}
+                                <option value="{{ language.Language }}">{{ language.Language }}</option>
+                                    {% endfor %}
+                                </select>
+                               
+                        </div>
+                       
+                      
+                        
+                            
+                                <div class="form-group">
+                                    <label for="Description">Description</label>
+                                    <input class="form-control" id="desc" name="desc" type="text" placeholder="Description (Optional)" >
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="Submit">
+                                </div>
+
+                            </div>
+                        
+                        
+						
+                    </form>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'REGISTER/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'REGISTER/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'REGISTER/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'REGISTER/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'REGISTER/js/global.js' %}"></script>
+
+    <!-- Disable -->
+
+    <script type="text/javascript">
+
+        function ShowHideDiv(btnPassport) {
+            var dv = document.getElementById("textneed");
+            dv.style.display = btnPassport.value == "OTHER" ? "block" : "none";
+            var dv1 = document.getElementById("lan");
+            dv1.style.display = btnPassport.value == "ACDEMIC" ? "block" : "none";
+        }
+
+     </script>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,670 @@
+{% extends 'Dashboard/Common.html' %}
+{% load static %}
+
+
+
+{% block Head %}
+
+<li>
+    <a  href="{% url 'Admin_Home' %}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+</li>
+ <li>
+    <a  href="{% url 'Admin_UI' %}"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+</li>
+<li>
+    <a  href="{% url 'Admin_Services' %}"><i class="fa fa-qrcode fa-3x"></i> Services</a>
+</li>
+       <li  >
+    <a   href="{% url 'Admin_Updations' %}"><i class="fa fa-bar-chart-o fa-3x"></i> Updations</a>
+</li>	
+  <li  >
+    <a class="active-menu"  href="{% url 'Admin_Task' %}"><i class="fa fa-table fa-3x"></i> My Task</a>
+</li>
+<li  >
+    <a  href="{% url 'Admin_Profile' %}"><i class="fa fa-edit fa-3x"></i> Profile </a>
+</li>				
+
+<li  >
+    <a  href="{% url 'Logout' %}"><i class="fa fa-square-o fa-3x"></i> Logout</a>
+</li>	
+{% endblock %}
+
+{% block body %}
+
+
+<div id="page-wrapper" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+             <h2>Hi , {{ data.Name }}</h2>   
+                 
+            </div>
+        </div>
+   <hr>
+
+
+
+
+
+
+
+                    <!-- The Service Modal -->
+                    <div id="myModal" class="modal">
+
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <h3><center>ADD SERVICE</center></h3>
+                    
+                        </div>
+                        <div class="modal-body">
+                          <br>
+        
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            
+                          <div class="row">
+
+                             
+                                      <div class="col-md-12 text-center">
+                               <div class="card">
+                                  <div class="card-body">
+                              
+                                      <input class="form-control mr-sm-2" name="service" type="text" placeholder="Service Name" required ><br>
+                           
+                                      <input class="form-control mr-sm-2" name="type" type="text" placeholder="Service Type" required ><br>
+
+                                      <input class="form-control mr-sm-2" name="desc" type="textarea" placeholder="Service Description" required ><br>
+                           
+                            <select name="status" class="nav-item dropdown form-control mr-sm-2" id="status" required><br>
+                              <option value="" disabled selected hidden>Status</option>
+                              <option value="Active">Active</option>
+                               <option value="Inactive">Inactive</option>
+                              </select>
+                              <br>
+                                    <button type="submit" name="servicebtn" class="btn btn-primary btn-info btn-md form-control" >Submit</button>
+                                    
+                                     </div> </div> </div>
+                                      </div>
+                     
+                                    </form>
+        
+                                    <br>
+                    
+                                  </div>
+                               </div>
+                            </div> 
+
+
+
+            <!-- /. ROW  -->
+    <div class="row">
+        <div class="col-md-12 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+               Update Your Services
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">Home</a>
+                        </li>
+                        <li class=""><a href="#Responses" data-toggle="tab">Responses</a>
+                        </li>
+                        <li class=""><a href="#Services" data-toggle="tab">Services</a>
+                        </li>
+                        <li class=""><a href="#Languages" data-toggle="tab">Languages</a>
+                        </li>
+                        <li class=""><a href="#Academic" data-toggle="tab">Academic Projects</a>
+                        </li>
+                        <li class=""><a href="#Business" data-toggle="tab">Business Works</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+                          
+                          {% if messages %}
+                                 
+                          {% for message in messages %}
+                      <br>
+                          <div class="alert success">
+                           <span class="closebtn">&times;</span>  
+                          <li class="nav-link" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        </div>
+                      
+                          {% endfor %}
+                      
+                      {% endif %}
+
+                            <h2 class="card-title">WELCOME BACK</h2>
+                            <p>This is the function helps you to manage your activities.</p>
+                        </div>
+                        <div class="tab-pane fade" id="Responses">
+                          <br>
+                            <center><h2 class="card-title">USER RESPONSES</h2></center> 
+                            <hr>
+                            <div >
+                                
+                            
+                            <form action="" enctype="multipart/form-data" method="POST">
+                            
+                              {% csrf_token %}
+                            
+                               <center><div><strong>GET DETAILS</strong> </div></center> 
+                               <br>
+                                <div class="row">
+                                  
+                                           <div class="col-md-4 text-center">
+                                              <div class="">
+                                                 <div class="card-body">
+                                                    
+                                                   <select name="userresponse" class="nav-item dropdown form-control mr-sm-2" id="userresponse" required>
+                                            
+                                                      <option value="" disabled selected hidden>Search By ID</option>
+                                                      {% for userressrch in userressrch %}
+                                                        <option value="{{ userressrch.id }}">{{ userressrch.id }}</option>
+                                                        {% endfor %}
+                                                       
+                                                      </select><br>
+
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-3 text-center">
+                                                       <div class="">
+                                                          <div class="card-body">
+                                                             <button type="submit" class="btn btn-info btn-md form-control" >Proceed</button>
+                                                             </div>
+                                                             </div>
+                                                             </div>
+                                                          </div>
+                                                       </form>
+                            
+                            <hr>
+                            
+                            
+                                <div class="row">
+                                   <div class="col-md-6 text-center">
+                                      <div class="card">
+                                         <div class="card-body">
+                                             
+                                        
+                                            <strong> <label>Response ID :</label></strong><br>
+                                             <input class="form-control mr-sm-2" type="text" placeholder="Response ID" value="{{ fetch.Name }}" id="check" disabled><br>
+                                             <strong> <label>Name :</label></strong><br>
+                                             <input class="form-control mr-sm-2" type="text" placeholder="Name" value="{{ fetch.swd }}"  disabled><br>
+                                             <strong> <label>EMail :</label></strong><br>
+                                             <input class="form-control mr-sm-2" type="text" placeholder="EMail" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                             <strong> <label>Mobile :</label></strong><br>
+                                             <input class="form-control mr-sm-2" type="text" placeholder="Mobile" value="{{ fetch.Addr_2 }}"  disabled><br>
+                                             <strong> <label>Service :</label></strong><br>
+                                             <input class="form-control mr-sm-2" type="text" placeholder="Service" value="{{ fetch.Addr_3 }}" disabled><br>
+                            
+                                                 
+                                         </div>
+                                   </div>
+                                   </div> 
+                            
+                                   
+                                    
+                                             <div class="col-md-6 text-center">
+                                      <div class="card">
+                                         <div class="card-body">
+
+                                            <strong> <label>Need :</label></strong><br>
+                                            <input class="form-control mr-sm-2" type="text" placeholder="Need" value="{{ fetch.Name }}" id="check" disabled><br>
+                                            <strong> <label>Language :</label></strong><br>
+                                            <input class="form-control mr-sm-2" type="text" placeholder="Language" value="{{ fetch.swd }}"  disabled><br>
+                                            <strong> <label>Description :</label></strong><br>
+                                            <input class="form-control mr-sm-2" type="text" placeholder="Description" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                            <strong> <label>Status :</label></strong><br>
+                                            <input class="form-control mr-sm-2" type="text" placeholder="Status" value="{{ fetch.Addr_2 }}"  disabled><br>
+                                            <strong> <label>Application Date :</label></strong><br>
+                                            <input class="form-control mr-sm-2" type="text" placeholder="Application Date" value="{{ fetch.Addr_3 }}" disabled><br>
+                           
+                                     
+                                                 <select name="Ins_Type" name="Ins_Type" class="nav-item dropdown form-control mr-sm-2" id="Ins_Type" required>
+                                                 <option value="" disabled selected hidden>Update Status</option>
+                                                   <option value="Submitted">Submitted</option>
+                                                   <option value="In Progress">In Progress</option>
+                                                   <option value="Hold">Hold</option>
+                                                   <option value="Closed">Closed</option>
+                                                 </select>
+                                                 <br>
+                                            
+                            
+                                         </div>
+                                      </div>
+                                   </div> 
+                                    
+                                </div>
+
+                                <p><input type="checkbox" name="terms"> Do you want to edit</p>
+                                                 
+                                <button type="submit" class="btn btn-success btn-md form-control" >Update</button>
+
+                              </div>
+                        </div>
+                        <div class="tab-pane fade" id="Services">
+                          <br>
+                            <center><h2 class="card-title">VIEW SERVICES</h2></center> 
+                            <hr>
+                            <div >
+                                
+                             <center><div><strong>GET DETAILS</strong> </div></center> 
+                             <br>
+                              <div class="row">
+                                
+                                <form action="" enctype="multipart/form-data" method="POST">
+                          
+                                  {% csrf_token %}
+
+                                         <div class="col-md-4 text-center">
+                                            <div class="">
+                                               <div class="card-body">
+                                                  
+                                                <select name="servicesearch" class="nav-item dropdown form-control mr-sm-2" id="servicesearch" required>
+                                            
+                                                   <option value="" disabled selected hidden>Search By ID</option>
+                                                   {% for servsrch in servsrch %}
+                                                     <option value="{{ servsrch.id }}">{{ servsrch.id }}</option>
+                                                     {% endfor %}
+                                                    
+                                                   </select><br>
+
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col-md-3 text-center">
+                                                     <div class="">
+                                                        <div class="card-body">
+                                                           <button type="submit" class="btn btn-info btn-md form-control" >Proceed</button>
+                                                           </div>
+                                                           </div>
+                                                           </div>
+
+                                                          </form>
+
+                                                           <div class="col-md-3 text-center">
+                                                            <div class="">
+                                                               <div class="card-body">
+                                                                  <button type="submit" id="myBtn" class="btn btn-warning" >ADD NEW</button>
+                                                                  </div>
+                                                                  </div>
+                                                                  </div>
+                                                        </div>
+                                                    
+                          
+                          <hr>
+                          
+                          
+                              <div class="row">
+                                 <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+                                          <strong> <label>Service ID :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Service ID" value="{{ fetch.Name }}" id="check" disabled><br>
+                                           <strong> <label>Service Name :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Service Name" value="{{ fetch.swd }}"  disabled><br>
+                                           <strong> <label>Service Type :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Service Type" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                           <strong> <label>Service Status :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Service Status" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                          
+                                       </div>
+                                 </div>
+                                 </div> 
+                                           <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+                                        <strong> <label>Service Description :</label></strong><br>
+                                        <input class="form-control mr-sm-2" type="textarea" placeholder="Service Description" value="{{ fetch.Name }}" id="check" disabled><br>
+
+                                          <strong> <label>Service Owner :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Service Owner" value="{{ fetch.Name }}" id="check" disabled><br>
+                                          <strong> <label>Added Date :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Date" value="{{ fetch.swd }}"  disabled><br>
+                                          <strong> <label>Service Status :</label></strong><br>
+                                               <select name="Ins_Type" name="Ins_Type" class="nav-item dropdown form-control mr-sm-2" id="Ins_Type" required>
+                                               <option value="" disabled selected hidden>Update Status</option>
+                                                 <option value="Active">Active</option>
+                                                 <option value="Inactive">Inactive</option>
+                                                 <option value="Blocked">Blocked</option>
+                                               </select>
+                                               <br>
+                                          
+                          
+                                       </div>
+                                    </div>
+                                 </div> 
+                                  
+                              </div>
+
+                              <p><input type="checkbox" name="terms"> Do you want to edit</p>
+                                               
+                              <button type="submit" class="btn btn-success btn-md form-control" >Update</button>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Languages">
+                            <br>
+                            <center><h2 class="card-title">VIEW LANGUAGES</h2></center> 
+                            <hr>
+                            <div >
+                          
+                          <form action="" enctype="multipart/form-data" method="POST">
+                          
+                            {% csrf_token %}
+                          
+                             <center><div><strong>GET DETAILS</strong> </div></center> 
+                             <br>
+                              <div class="row">
+                                
+                                         <div class="col-md-4 text-center">
+                                            <div class="">
+                                               <div class="card-body">
+                                                 
+                                                <select name="lansearch" class="nav-item dropdown form-control mr-sm-2" id="lansearch" required>
+                                            
+                                                   <option value="" disabled selected hidden>Search By ID</option>
+                                                   {% for lansearch in lansearch %}
+                                                     <option value="{{ lansearch.id }}">{{ lansearch.id }}</option>
+                                                     {% endfor %}
+                                                    
+                                                   </select><br>
+
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col-md-3 text-center">
+                                                     <div class="">
+                                                        <div class="card-body">
+                                                           <button type="submit" class="btn btn-info btn-md form-control" >Proceed</button>
+                                                           </div>
+                                                           </div>
+                                                           </div>
+                                                        </div>
+                                                     </form>
+                          
+                          <hr>
+                          
+                          
+                              <div class="row">
+                                 <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+                                           
+                                      
+                                          <strong> <label>Language ID :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Language ID" value="{{ fetch.Name }}" disabled><br>
+                                           <strong> <label>Language :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Language" value="{{ fetch.swd }}"  disabled><br>
+                                           <strong> <label>Description :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="textarea" placeholder="Description" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                           <strong> <label>Status :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Status" value="{{ fetch.Addr_2 }}"  disabled><br>
+                                           <strong> <label>Owner :</label></strong><br>
+                                           <input class="form-control mr-sm-2" type="text" placeholder="Owner" value="{{ fetch.Addr_3 }}" disabled><br>
+                          
+                                               
+                                       </div>
+                                 </div>
+                                 </div> 
+                          
+                                 
+                                  
+                                           <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+
+                                          <strong> <label>Date :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Date" value="{{ fetch.Name }}" id="check" disabled><br>
+                                          <strong> <label>Image :</label></strong><br>
+                                          <img src="{{ data.image.url }}"  width="450" height="220"><br><br>
+                                         
+                                   
+                                               <select name="Lanstatus" name="Ins_Type" class="nav-item dropdown form-control mr-sm-2" id="Ins_Type" required>
+                                               <option value="" disabled selected hidden>Update Status</option>
+                                                 <option value="Active">Active</option>
+                                                 <option value="Inactive">Inactive</option>
+                                                 <option value="Blocked">Blocked</option>
+                                               </select>
+                                               <br>
+                                          
+                          
+                                       </div>
+                                    </div>
+                                 </div> 
+                                  
+                              </div>
+
+                              <p><input type="checkbox" name="terms"> Do you want to edit</p>
+                                               
+                              <button type="submit" class="btn btn-success btn-md form-control" >Update</button>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Academic">
+                            <br>
+                            <center><h2 class="card-title">VIEW ACADEMIC</h2></center> 
+                            <hr>
+                            <div >
+                                
+                          
+                          <form action="" enctype="multipart/form-data" method="POST">
+                          
+                            {% csrf_token %}
+                          
+                             <center><div><strong>GET DETAILS</strong> </div></center> 
+                             <br>
+                              <div class="row">
+                                
+                                         <div class="col-md-4 text-center">
+                                            <div class="">
+                                               <div class="card-body">
+                                                
+                                                <select name="acasearch" class="nav-item dropdown form-control mr-sm-2" id="acasearch" required>
+                                            
+                                                   <option value="" disabled selected hidden>Search By ID</option>
+                                                   {% for acasearch in acasearch %}
+                                                     <option value="{{ acasearch.id }}">{{ acasearch.id }}</option>
+                                                     {% endfor %}
+                                                    
+                                                   </select><br>
+
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col-md-3 text-center">
+                                                     <div class="">
+                                                        <div class="card-body">
+                                                           <button type="submit" class="btn btn-info btn-md form-control" >Proceed</button>
+                                                           </div>
+                                                           </div>
+                                                           </div>
+                                                        </div>
+                                                     </form>
+                          
+                          <hr>
+                          
+                          
+                              <div class="row">
+                                 <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+                                           
+                                          <strong> <label>Project ID :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Project ID" value="{{ fetch.Name }}" disabled><br>
+                                          <strong> <label>Project Name :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Project Name" value="{{ fetch.swd }}"  disabled><br>
+                                          <strong> <label>Type :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="textarea" placeholder="Type" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                          <strong> <label>Language :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Language" value="{{ fetch.Addr_2 }}"  disabled><br>
+                                          <strong> <label>Owner :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Owner" value="{{ fetch.Addr_3 }}" disabled><br>
+                         
+                                               
+                                       </div>
+                                 </div>
+                                 </div> 
+                          
+                                 
+                                  
+                                           <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+
+                                          <strong> <label>Description :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="textarea" placeholder="Description" value="{{ fetch.Name }}" disabled><br>
+                                          <strong> <label>Status :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Status" value="{{ fetch.swd }}"  disabled><br>
+                                          <strong> <label>Date :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Date" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                          <strong> <label>Language :</label></strong><br>
+                                          
+                                 
+                                               <select name="acstatus" name="Ins_Type" class="nav-item dropdown form-control mr-sm-2" id="Ins_Type" required>
+                                               <option value="" disabled selected hidden>Update Status</option>
+                                                 <option value="Active">Active</option>
+                                                 <option value="InActive">InActive</option>
+                                                 <option value="Blocked">Blocked</option>
+                                               </select>
+                                               <br>
+                                          
+                          
+                                       </div>
+                                    </div>
+                                 </div> 
+                                  
+                              </div>
+
+                              <p><input type="checkbox" name="terms"> Do you want to edit</p>
+                                               
+                              <button type="submit" class="btn btn-success btn-md form-control" >Update</button>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="Business">
+                            <br>
+                            <center><h2 class="card-title">VIEW BUSINESS</h2></center> 
+                            <hr>
+                            <div >
+                          
+                          <form action="" enctype="multipart/form-data" method="POST">
+                          
+                            {% csrf_token %}
+                          
+                             <center><div><strong>GET DETAILS</strong> </div></center> 
+                             <br>
+                              <div class="row">
+                                
+                                         <div class="col-md-4 text-center">
+                                            <div class="">
+                                               <div class="card-body">
+                                                
+                                                <select name="bussearch" class="nav-item dropdown form-control mr-sm-2" id="bussearch" required>
+                                            
+                                                   <option value="" disabled selected hidden>Search By ID</option>
+                                                   {% for bussearch in bussearch %}
+                                                     <option value="{{ bussearch.id }}">{{ bussearch.id }}</option>
+                                                     {% endfor %}
+                                                    
+                                                   </select><br>
+
+                                                  </div>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col-md-3 text-center">
+                                                     <div class="">
+                                                        <div class="card-body">
+                                                           <button type="submit" class="btn btn-info btn-md form-control" >Proceed</button>
+                                                           </div>
+                                                           </div>
+                                                           </div>
+                                                        </div>
+                                                     </form>
+                          
+                          <hr>
+                          
+                          
+                              <div class="row">
+                                 <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+                                           
+                                          <strong> <label>Business ID :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Business ID" value="{{ fetch.Name }}" disabled><br>
+                                          <strong> <label>Business Name :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Business Name" value="{{ fetch.swd }}"  disabled><br>
+                                          <strong> <label>Type :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="textarea" placeholder="Type" value="{{ fetch.Addr_1 }}"  disabled><br>
+                              
+                                          <strong> <label>Client Name :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Client Name" value="{{ fetch.Addr_3 }}" disabled><br>
+                                          <strong> <label>Client Contact :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Client Contact" value="{{ fetch.Name }}" disabled><br>
+                                          <strong> <label>Client E-Mail :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Client E-Mail" value="{{ fetch.swd }}"  disabled><br>
+                                          
+                                               
+                                       </div>
+                                 </div>
+                                 </div> 
+                          
+                                 
+                                  
+                                           <div class="col-md-6 text-center">
+                                    <div class="card">
+                                       <div class="card-body">
+
+                                          <strong> <label>Description :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="textarea" placeholder="Description" value="{{ fetch.Addr_3 }}" disabled><br>
+                                          <strong> <label>Project URL :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Project URL" value="{{ fetch.Addr_1 }}"  disabled><br>
+                                          <strong> <label>Language :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Language" value="{{ fetch.Addr_2 }}"  disabled><br>
+                                          <strong> <label>Status :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Status" value="{{ fetch.Addr_3 }}" disabled><br>
+                                          <strong> <label>Date :</label></strong><br>
+                                          <input class="form-control mr-sm-2" type="text" placeholder="Date" value="{{ fetch.Addr_3 }}" disabled><br>
+                                          
+                                   
+                                               <select name="Busstatus" name="Ins_Type" class="nav-item dropdown form-control mr-sm-2" id="Ins_Type" required>
+                                               <option value="" disabled selected hidden>Update Status</option>
+                                                 <option value="Active">Active</option>
+                                                 <option value="Inactive">Inactive</option>
+                                                 <option value="Blocked">Blocked</option>
+                                               </select>
+                                               <br>
+                                          
+                          
+                                       </div>
+                                    </div>
+                                 </div> 
+                                  
+                              </div>
+
+                              <p><input type="checkbox" name="terms"> Do you want to edit</p>
+                                               
+                              <button type="submit" class="btn btn-success btn-md form-control" >Update</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+    </div>
+    
+  
+            <!-- /. ROW  -->
+
+</div>
+    
+    </div>
+
+
+{% endblock %}
